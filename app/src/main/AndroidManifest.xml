@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Dialog_recording"></activity>
+        <activity android:name=".YouTube"></activity>
+        <activity android:name=".Dialog_recording" />
         <activity android:name=".Result" />
         <activity android:name=".Search" />
         <activity android:name=".OldmanResult" />
