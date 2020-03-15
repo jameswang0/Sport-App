@@ -118,6 +118,7 @@ public class Search extends AppCompatActivity {
                 bundle.putString("age", age);
                 bundle.putString("injury_history", injury_history);
                 bundle.putString("which_btn", which_btn);
+                bundle.putString("text_search", search.getText().toString());
                 intent.putExtras(bundle);
                 Log.d("Response", bundle.toString());
                 startActivity(intent);
@@ -147,7 +148,7 @@ public class Search extends AppCompatActivity {
                 bundle.putString("age", age);
                 bundle.putString("injury_history", injury_history);
                 bundle.putString("which_btn", which_btn);
-                bundle.putString("text_search", search.getText().toString());
+                //bundle.putString("text_search", search.getText().toString());
                 intent.putExtras(bundle);
                 Log.d("Response", bundle.toString());
                 startActivity(intent);
@@ -177,6 +178,7 @@ public class Search extends AppCompatActivity {
                 bundle.putString("age", age);
                 bundle.putString("injury_history", injury_history);
                 bundle.putString("which_btn", which_btn);
+                bundle.putString("text_search", search.getText().toString());
                 intent.putExtras(bundle);
                 Log.d("Response", bundle.toString());
                 startActivity(intent);
@@ -206,6 +208,7 @@ public class Search extends AppCompatActivity {
                 bundle.putString("age", age);
                 bundle.putString("injury_history", injury_history);
                 bundle.putString("which_btn", which_btn);
+                bundle.putString("text_search", search.getText().toString());
                 intent.putExtras(bundle);
                 Log.d("Response", bundle.toString());
                 startActivity(intent);
@@ -584,6 +587,4 @@ public class Search extends AppCompatActivity {
                 break;
         }
     }
-
-
 }

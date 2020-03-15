@@ -17,13 +17,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 
+
 public class CustomListAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
     private final ArrayList<String> videoTitle;
     private final ArrayList<String> videoImage;
     private final ArrayList<String> videoID;
-
 
     public CustomListAdapter(Activity context, ArrayList<String> videoTitle, ArrayList<String> videoImage, ArrayList<String> videoID) {
         super(context, R.layout.result_list, videoTitle);

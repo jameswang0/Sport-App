@@ -19,8 +19,10 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class Result extends AppCompatActivity {
@@ -37,6 +39,7 @@ public class Result extends AppCompatActivity {
     private String q_string;
     private String which_btn;
     private String text_search;
+    private String Encoded_Qstring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +57,32 @@ public class Result extends AppCompatActivity {
         age = bundle.getString("age");
         injury_his = bundle.getString("injury_history");
         which_btn = bundle.getString("which_btn");
-        Toast.makeText(Result.this, which_btn, Toast.LENGTH_SHORT).show();
+
         switch (which_btn)
         {
-            case("1"):  //injury history
-                q_string = injury_his + "運動";
-                break;
-            case("2"):  //normal search
-                text_search = bundle.getString("text_search");
-                q_string = text_search;
-                break;
-            case("3"):  //speech recognition
-                q_string = injury_his;
-                break;
+            case("1"):
+            case("3"):
+            case("4"): {
+                //Text search
+                //Google Speech Recognition
+                //Taiwanese Recognition
+                    text_search = bundle.getString("text_search");
+                    q_string = text_search;
+                    break;
+                }
+            case("2"):
+                {   //Suggestion
+                    q_string = injury_his + "運動";
+                    Toast.makeText(Result.this, q_string, Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+        }
+
+        try {
+            Encoded_Qstring = URLEncoder.encode(q_string, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            Toast.makeText(Result.this, "Please Search again", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -173,7 +189,7 @@ public class Result extends AppCompatActivity {
         ArrayList<VideoEntry> totalResultInfo = new ArrayList<VideoEntry>();
 
         //Some url endpoint that you may have
-        String myUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=" + q_string + "&key=" + getResources().getString(R.string.youtube_api) +"\n";
+        String myUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=" + Encoded_Qstring + "&key=" + getResources().getString(R.string.youtube_api) +"\n";
         //String to place our result in
         String result;
         //Instantiate new instance of our class
