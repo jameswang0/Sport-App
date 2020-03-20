@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button old_btn, young_btn;
+    private Button old_btn, young_btn, record_btn;
     private EditText nameValue, ageValue, hurtValue;
 
     @Override
@@ -66,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
                 {
                     Toast.makeText(MainActivity.this, "Please Enter Completely ! ", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        record_btn = findViewById(R.id.record_btn);
+        record_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Record.class));
             }
         });
     }

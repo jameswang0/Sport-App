@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="288dp"
-        android:layout_height="47dp"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
         android:layout_marginTop="80dp"
         android:text="姓名"
         android:background="#B3FFFFFF"
@@ -24,46 +24,48 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="190dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="#B3FFFFFF"
         android:text="年齡"
         android:textColor="#E91E63"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="138dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="#B3FFFFFF"
         android:text="傷病史"
         android:textColor="#E91E63"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/age" />
 
     <EditText
         android:id="@+id/name"
         android:layout_width="335dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.297"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/age"
-        android:layout_width="252dp"
-        android:layout_height="41dp"
+        android:layout_width="335dp"
+        android:layout_height="50dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintHorizontal_bias="0.58"
@@ -72,19 +74,19 @@
 
     <EditText
         android:id="@+id/hurt_history"
-        android:layout_width="270dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="335dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_width="170dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
         android:text="老人"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -93,12 +95,26 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_width="170dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
         android:text="一般人"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/hurt_history"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/button1"
         app:layout_constraintTop_toBottomOf="@+id/hurt_history" />
+
+    <Button
+        android:id="@+id/record_btn"
+        android:layout_width="131dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:text="RECORD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

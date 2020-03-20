@@ -40,7 +40,7 @@
         android:background="@drawable/speech"
         app:layout_constraintStart_toEndOf="@+id/search"
         app:layout_constraintTop_toTopOf="parent"
-        android:onClick="getSpeechInput "/>
+        android:onClick="getSpeechInput"/>
 
     <Button
         android:id="@+id/Twn_btn"
@@ -55,8 +55,8 @@
 
     <Button
         android:id="@+id/return_btn"
-        android:layout_width="177dp"
-        android:layout_height="85dp"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/arrow"
         app:layout_constraintEnd_toEndOf="parent"
