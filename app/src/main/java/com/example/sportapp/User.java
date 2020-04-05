@@ -6,6 +6,7 @@ public class User {
     private float weight;
     private int reps;
     private int set;
+    private int date;
 
     public User() {
     }
@@ -40,5 +41,13 @@ public class User {
 
     public void setSet(int set) {
         this.set = set;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
     }
 }
