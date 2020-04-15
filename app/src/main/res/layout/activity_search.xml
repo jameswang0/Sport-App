@@ -22,11 +22,9 @@
         android:id="@+id/search_button"
         android:layout_width="140dp"
         android:layout_height="56dp"
-        android:layout_marginTop="48dp"
-        android:text="Search"
+        android:layout_marginTop="20dp"
         android:background="@drawable/glass"
         app:layout_constraintEnd_toEndOf="@+id/search"
-        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="@+id/search"
         app:layout_constraintTop_toBottomOf="@+id/search" />
 
@@ -54,23 +52,16 @@
         app:layout_constraintTop_toBottomOf="@+id/speech_button" />
 
     <Button
-        android:id="@+id/return_btn"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:background="@drawable/arrow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/suggest_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="116dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
         android:text="Sport Suggestion"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/textView"
@@ -78,9 +69,51 @@
         android:layout_height="34dp"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="120dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/return_btn" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="415dp"
+        android:layout_height="153dp"
+        android:layout_marginBottom="80dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/go_profile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/profile"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/go_search"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/search"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/go_record"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/record"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/go_oldman"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/oldman"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

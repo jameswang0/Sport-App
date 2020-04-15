@@ -10,7 +10,7 @@
         android:id="@+id/sport"
         android:layout_width="290dp"
         android:layout_height="55dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="4dp"
         android:text="SPORT"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -72,11 +72,11 @@
 
     <Button
         android:id="@+id/save"
-        android:layout_width="147dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginLeft="140dp"
-        android:layout_marginBottom="12dp"
+        android:layout_width="127dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginBottom="124dp"
         android:text="Save"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -103,23 +103,15 @@
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <Button
-        android:id="@+id/btn_return"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:background="@drawable/arrow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="180dp"
-        android:layout_marginRight="180dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="192dp"
+        android:layout_marginRight="192dp"
         android:onClick="showPopup"
         android:text="SPORT"
         app:layout_constraintEnd_toEndOf="parent"
@@ -145,16 +137,55 @@
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
+    <LinearLayout
+        android:layout_width="408dp"
+        android:layout_height="126dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_return"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/profile"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/go_search"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/search"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/record"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/go_oldman"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/oldman"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/btn_graph"
-        android:layout_width="124dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
+        android:layout_width="111dp"
+        android:layout_height="59dp"
         android:text="GRAPH"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/save"
+        app:layout_constraintTop_toTopOf="@+id/save" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

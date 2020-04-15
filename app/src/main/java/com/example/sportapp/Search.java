@@ -45,7 +45,9 @@ public class Search extends AppCompatActivity {
     // 1 -> Normal search   2 -> Suggestion     3 -> Google Speech  4 -> TWN Speech
     private String which_btn;
 
-    private Button search_btn, suggest_btn, speech_btn, twn_btn, return_btn;
+    private String twn_result = "";
+
+    private Button search_btn, suggest_btn, speech_btn, twn_btn, record_btn, profile_btn, oldman_btn;
     private String name, age, injury_history;
     private EditText search;
     private boolean busy;
@@ -57,6 +59,7 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         setInit();
+        getVar();
         permissionCheck();
         textResult.setText("辨識結果");
 
@@ -64,7 +67,6 @@ public class Search extends AppCompatActivity {
         setListener2(); //Suggestion Search
         setListener3(); //Google Speech Search
         setListener4(); //Taiwanese Speech Search
-        setListener5(); //Set Return to MainActivity
 
         speech_btn.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -86,6 +88,41 @@ public class Search extends AppCompatActivity {
             }
         });
 
+        //go to record
+        record_btn = findViewById(R.id.go_record);
+        record_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(Search.this, Record.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("nameValue", name);
+                bundle.putString("ageValue", age);
+                bundle.putString("hurtValue", injury_history);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        //go to profile
+        profile_btn = findViewById(R.id.go_profile);
+        profile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Search.this, MainActivity.class));
+            }
+        });
+
+        //go to oldman result
+        oldman_btn = findViewById(R.id.go_oldman);
+        oldman_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Search.this, OldmanResult.class));
+            }
+        });
+
+
     }
 
     private void setInit()
@@ -96,9 +133,15 @@ public class Search extends AppCompatActivity {
         search_btn = findViewById(R.id.search_button);
         speech_btn = findViewById(R.id.speech_button);
         twn_btn = findViewById(R.id.Twn_btn);
-        return_btn = findViewById(R.id.return_btn);
         search = findViewById(R.id.search);
-        getVar();
+    }
+
+    private void getVar() {
+        Bundle bundle = this.getIntent().getExtras();
+        name = bundle.getString("nameValue");
+        age = bundle.getString("ageValue");
+        injury_history = bundle.getString("hurtValue");
+        Toast.makeText(Search.this, injury_history, Toast.LENGTH_SHORT).show();
     }
 
     private void setListener1(){
@@ -221,35 +264,6 @@ public class Search extends AppCompatActivity {
         }
     };
 
-    private void setListener5() {
-        return_btn.setOnClickListener(bEvent5);
-    }
-
-    private View.OnClickListener bEvent5 = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            try
-            {
-                Intent intent = new Intent();
-                intent.setClass(Search.this, MainActivity.class);
-                startActivity(intent);
-
-            }
-            catch (Exception e)
-            {
-                Toast.makeText(Search.this, "please enter completly1", Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
-
-    private void getVar() {
-        Bundle bundle = this.getIntent().getExtras();
-        name = bundle.getString("nameValue");
-        age = bundle.getString("ageValue");
-        injury_history = bundle.getString("hurtValue");
-        Toast.makeText(Search.this, injury_history, Toast.LENGTH_SHORT).show();
-    }
-
     private void permissionCheck() {
         int permission1 = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int permission2 = ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
@@ -355,7 +369,7 @@ public class Search extends AppCompatActivity {
             textResult.setText(msg);
             new Tai2Chi().execute(msg);
         }
-        textResult.setText(msg);
+        //textResult.setText(msg);
         search.setText(msg);
         busy = false;
     }

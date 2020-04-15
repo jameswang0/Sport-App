@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     private Button old_btn, young_btn, record_btn;
     private EditText nameValue, ageValue, hurtValue;
 
+    private Button graph_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,8 +75,16 @@ public class MainActivity extends AppCompatActivity {
         record_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Record.class));
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, Record.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("nameValue", nameValue.getText().toString());
+                bundle.putString("ageValue", ageValue.getText().toString());
+                bundle.putString("hurtValue", hurtValue.getText().toString());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
+
     }
 }

@@ -3,7 +3,7 @@ package com.example.sportapp;
 public class User {
 
     private String sportName;
-    private float weight;
+    private int weight;
     private int reps;
     private int set;
     private int date;
@@ -19,11 +19,11 @@ public class User {
         this.sportName = sportName;
     }
 
-    public float getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 

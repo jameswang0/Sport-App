@@ -16,10 +16,14 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class ShowGraph extends AppCompatActivity {
 
-    private ArrayList<Integer> squatVolume = new ArrayList<Integer>();
+    private ArrayList<Integer> squatVolume = new ArrayList<>();
+    private ArrayList<Integer> weightVolume = new ArrayList<>();
+
     private LineChart mChart;
     private LineData data1;
 
@@ -39,13 +43,14 @@ public class ShowGraph extends AppCompatActivity {
         });
 
         mChart = findViewById(R.id.lineChart);
-        initChart(mChart);
+        initChart(mChart); //初始化畫圖的基本設定
 
-        getValue();
+        getValue(); //獲取畫圖所需的數據
         Log.v("ShowGraph", squatVolume.toString());
-        setChart();
+        setChart(); //畫圖
     }
 
+    //畫圖的基本設定
     private void initChart(LineChart lineChart) {
 
         lineChart.setDragEnabled(true);
@@ -55,11 +60,12 @@ public class ShowGraph extends AppCompatActivity {
     private void getValue() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        squatVolume = bundle.getIntegerArrayList("liststr");
-        //saveDate = bundle.getIntegerArrayList("date_list");
+        squatVolume = bundle.getIntegerArrayList("liststr"); //get squat static you insert in Record.java and from firebase
 
+        weightVolume = bundle.getIntegerArrayList("weight"); //get weight static you insert in Record.java and from firebase
     }
 
+    //畫圖
     private void setChart() {
 
         ArrayList<Entry> yValues = new ArrayList<>();
@@ -75,7 +81,9 @@ public class ShowGraph extends AppCompatActivity {
 
          */
         for(int i=0;i<squatVolume.size();i++) {
-            yValues.add(new Entry(i, squatVolume.get(i)));
+            //yValues.add(new Entry(i, squatVolume.get(i)));
+            yValues.add(new Entry(i, weightVolume.get(i)));
+
         }
 
         LineDataSet set1 = new LineDataSet(yValues, "Weight");

@@ -24,13 +24,16 @@ import java.util.ArrayList;
 
 public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
 
-    private ArrayList<Integer> squatVolume = new ArrayList<>();
-    private ArrayList<Integer> saveDate = new ArrayList<>();
+    private ArrayList<Integer> squatVolume = new ArrayList<>(); //save squat static from firebase
+    private ArrayList<Integer> saveDate = new ArrayList<>(); //save date static from firebase
+    private ArrayList<Integer> weightVolume = new ArrayList<>(); //save weight static from firebase
 
     private EditText sport, weight, set, rep, date;
-    private Button btnSave, return_btn, btnGraph;
-    DatabaseReference reference, squat_reference, bench_reference, dead_reference;
+    private Button btnSave, return_btn, btnGraph, btn_search, btn_oldman;
+    DatabaseReference  squat_reference, bench_reference, dead_reference;
     User user = new User();
+
+    private String name, age, injury_history;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +47,12 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
         date = findViewById(R.id.edit_date);
         btnSave = findViewById(R.id.save);
 
-        reference = FirebaseDatabase.getInstance().getReference().child("TEST");
+        //reference = FirebaseDatabase.getInstance().getReference().child("TEST");
         squat_reference = FirebaseDatabase.getInstance().getReference().child("SQUAT");
         bench_reference = FirebaseDatabase.getInstance().getReference().child("BENCH");
         dead_reference = FirebaseDatabase.getInstance().getReference().child("DEADLIFT");
 
+        //go to profile activity
         return_btn = findViewById(R.id.btn_return);
         return_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +61,7 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
             }
         });
 
+        //go to see the graph
         btnGraph = findViewById(R.id.btn_graph);
         btnGraph.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,16 +71,43 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
                 Bundle bundle = new Bundle();
                 bundle.putIntegerArrayList("liststr", squatVolume);
                 bundle.putIntegerArrayList("date", saveDate);
+                bundle.putIntegerArrayList("weight", weightVolume);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
 
+        //go to search activity
+        btn_search = findViewById(R.id.go_search);
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(Record.this, Search.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("nameValue", name);
+                bundle.putString("ageValue", age);
+                bundle.putString("hurtValue", injury_history);
+                intent.putExtras(bundle);
 
+                startActivity(intent);
+            }
+        });
+
+        //go to oldman
+        btn_oldman = findViewById(R.id.go_oldman);
+        btn_oldman.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Record.this, OldmanResult.class));
+            }
+        });
+
+        //save what you just insert
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                float weightt = Float.parseFloat((weight.getText().toString().trim()));
+                int weightt = Integer.parseInt((weight.getText().toString().trim()));
                 int sett = Integer.parseInt(set.getText().toString().trim());
                 int repp = Integer.parseInt(rep.getText().toString().trim());
                 int datee = Integer.parseInt(date.getText().toString().trim());
@@ -146,6 +178,15 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
         Query query = FirebaseDatabase.getInstance().getReference("SQUAT")
                 .orderByChild("date");
         query.addListenerForSingleValueEvent(valueEventListener);
+
+        /*
+        for(int i=0;i<weightVolume.size();i++) {
+            weightStat[i] = weightVolume.get(i).toString();
+        }
+
+         */
+        //Log.d("SendValue", weightStat[0]);
+        getVar();
     }
 
     ValueEventListener valueEventListener = new ValueEventListener() {
@@ -157,7 +198,9 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
                     User user = snapshot.getValue(User.class);
                     squatVolume.add(user.getReps());
                     saveDate.add(user.getDate());
-                    Log.v("MainAcyivity", squatVolume.toString());
+                    weightVolume.add(user.getWeight());
+                    Log.v("SquatVolume", squatVolume.toString());
+                    Log.d("WeightVolume", weightVolume.toString());
 
                 }
             }
@@ -169,6 +212,7 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
         }
     };
 
+    //show popup in selecting sport
     public void showPopup(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
         popupMenu.setOnMenuItemClickListener(this);
@@ -195,5 +239,12 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
                 return false;
 
         }
+    }
+
+    private void getVar() {
+        Bundle bundle = this.getIntent().getExtras();
+        name = bundle.getString("nameValue");
+        age = bundle.getString("ageValue");
+        injury_history = bundle.getString("hurtValue");
     }
 }
