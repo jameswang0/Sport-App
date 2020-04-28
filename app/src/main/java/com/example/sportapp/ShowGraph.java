@@ -23,6 +23,7 @@ public class ShowGraph extends AppCompatActivity {
 
     private ArrayList<Integer> squatVolume = new ArrayList<>();
     private ArrayList<Integer> weightVolume = new ArrayList<>();
+    private String name, age, injury_history;
 
     private LineChart mChart;
     private LineData data1;
@@ -34,17 +35,18 @@ public class ShowGraph extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_graph);
 
-        returnBtn = findViewById(R.id.returnBtn);
+        returnBtn = findViewById(R.id.button6);
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ShowGraph.this, Record.class));
+                startActivity(new Intent(ShowGraph.this, MainActivity.class));
             }
         });
 
         mChart = findViewById(R.id.lineChart);
         initChart(mChart); //初始化畫圖的基本設定
 
+        getVar(); //get data from bundle
         getValue(); //獲取畫圖所需的數據
         Log.v("ShowGraph", squatVolume.toString());
         setChart(); //畫圖
@@ -96,5 +98,12 @@ public class ShowGraph extends AppCompatActivity {
         data1 = new LineData(dataSets);
 
         mChart.setData(data1);
+    }
+
+    private void getVar() {
+        Bundle bundle = this.getIntent().getExtras();
+        name = bundle.getString("nameValue");
+        age = bundle.getString("ageValue");
+        injury_history = bundle.getString("hurtValue");
     }
 }

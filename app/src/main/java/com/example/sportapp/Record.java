@@ -62,7 +62,7 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
         });
 
         //go to see the graph
-        btnGraph = findViewById(R.id.btn_graph);
+        /*btnGraph = findViewById(R.id.btn_graph);
         btnGraph.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +77,8 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
             }
         });
 
+         */
+
         //go to search activity
         btn_search = findViewById(R.id.go_search);
         btn_search.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +91,6 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
                 bundle.putString("ageValue", age);
                 bundle.putString("hurtValue", injury_history);
                 intent.putExtras(bundle);
-
                 startActivity(intent);
             }
         });
@@ -212,13 +213,21 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
         }
     };
 
-    //show popup in selecting sport
+    //show popup in selecting sport and can also select which sport graph to display
     public void showPopup(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
         popupMenu.setOnMenuItemClickListener(this);
         popupMenu.inflate(R.menu.sport_menu);
         popupMenu.show();
     }
+
+    public void graphPopup(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.setOnMenuItemClickListener(this);
+        popupMenu.inflate(R.menu.graph_menu);
+        popupMenu.show();
+    }
+
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
@@ -234,6 +243,17 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
             case R.id.item3:
                 Toast.makeText(Record.this, "Click Item3!" , Toast.LENGTH_SHORT).show();
                 sport.setText("deadlift");
+                return true;
+
+            case R.id.item4:
+                Intent intent = new Intent();
+                intent.setClass(Record.this, ShowGraph.class);
+                Bundle bundle = new Bundle();
+                bundle.putIntegerArrayList("liststr", squatVolume);
+                bundle.putIntegerArrayList("date", saveDate);
+                bundle.putIntegerArrayList("weight", weightVolume);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 return true;
             default:
                 return false;

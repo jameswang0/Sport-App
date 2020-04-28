@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#4000BCD4"
     tools:context=".Record">
 
     <TextView
@@ -11,7 +12,7 @@
         android:layout_width="290dp"
         android:layout_height="55dp"
         android:layout_marginTop="4dp"
-        android:text="SPORT"
+        android:text="運動名稱"
         android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="normal"
@@ -24,7 +25,7 @@
         android:id="@+id/weight"
         android:layout_width="290dp"
         android:layout_height="55dp"
-        android:text="WEIGHT"
+        android:text="重量 WEIGHT (Kg)"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/sport"
@@ -35,7 +36,7 @@
         android:id="@+id/set"
         android:layout_width="290dp"
         android:layout_height="55dp"
-        android:text="SETS"
+        android:text="組數  SETS"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/weight"
@@ -70,23 +71,11 @@
         app:layout_constraintStart_toStartOf="@+id/set"
         app:layout_constraintTop_toBottomOf="@+id/set" />
 
-    <Button
-        android:id="@+id/save"
-        android:layout_width="127dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginBottom="124dp"
-        android:text="Save"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="290dp"
         android:layout_height="55dp"
-        android:text="REPS"
+        android:text="下數  REPS"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/edit_set"
@@ -104,16 +93,16 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 
-
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="192dp"
-        android:layout_marginRight="192dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginRight="144dp"
         android:onClick="showPopup"
         android:text="SPORT"
+        android:background="@drawable/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -121,7 +110,7 @@
         android:id="@+id/textView5"
         android:layout_width="290dp"
         android:layout_height="55dp"
-        android:text="DATE"
+        android:text="日期   DATE"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/edit_reps"
@@ -133,13 +122,15 @@
         android:id="@+id/edit_date"
         android:layout_width="290dp"
         android:layout_height="55dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         app:layout_constraintEnd_toEndOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <LinearLayout
-        android:layout_width="408dp"
-        android:layout_height="126dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="406dp"
+        android:layout_height="98dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -148,44 +139,60 @@
         <Button
             android:id="@+id/btn_return"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/profile"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_account_circle_black_24dp"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/go_search"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/search"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_search_black_24dp"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/button5"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/record"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_library_books_black_24dp"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/go_oldman"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/oldman"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_directions_walk_black_24dp"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_graph"
-        android:layout_width="111dp"
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="255dp"
         android:layout_height="59dp"
-        android:text="GRAPH"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/save"
-        app:layout_constraintTop_toTopOf="@+id/save" />
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/btn_graph"
+            android:layout_width="127dp"
+            android:layout_height="61dp"
+            android:onClick="graphPopup"
+            android:background="@drawable/ic_insert_chart_black_24dp"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="127dp"
+            android:layout_height="61dp"
+            android:background="@drawable/ic_cloud_upload_black_24dp"
+            android:textSize="30sp" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

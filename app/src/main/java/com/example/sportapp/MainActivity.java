@@ -2,9 +2,12 @@ package com.example.sportapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button old_btn, young_btn, record_btn;
     private EditText nameValue, ageValue, hurtValue;
-
+    InputMethodManager imm;
     private Button graph_btn;
 
     @Override
@@ -86,5 +89,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+            //隱藏鍵盤
+            imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm.isActive()) {
+                imm.hideSoftInputFromWindow(MainActivity.this.getCurrentFocus().getWindowToken(), 0);
+            }
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
     }
 }
