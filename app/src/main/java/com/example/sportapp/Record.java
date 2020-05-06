@@ -24,14 +24,18 @@ import java.util.ArrayList;
 
 public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
 
-    private ArrayList<Integer> squatVolume = new ArrayList<>(); //save squat static from firebase
+    private ArrayList<Integer> squatVolume = new ArrayList<>(); //從firebase得到深蹲的重量
+    private ArrayList<Integer> benchVolume = new ArrayList<>(); //從firebase得到握推的重量
+    private ArrayList<Integer> deadliftVolume = new ArrayList<>(); //從firebase得到硬舉的重量
+
     private ArrayList<Integer> saveDate = new ArrayList<>(); //save date static from firebase
-    private ArrayList<Integer> weightVolume = new ArrayList<>(); //save weight static from firebase
+    //private ArrayList<Integer> weightVolume = new ArrayList<>(); //save weight static from firebase
 
     private EditText sport, weight, set, rep, date;
     private Button btnSave, return_btn, btnGraph, btn_search, btn_oldman;
     DatabaseReference  squat_reference, bench_reference, dead_reference;
     User user = new User();
+    int which_sport = 1;
 
     private String name, age, injury_history;
 
@@ -176,20 +180,25 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
             }
         });
 
-        Query query = FirebaseDatabase.getInstance().getReference("SQUAT")
-                .orderByChild("date");
-        query.addListenerForSingleValueEvent(valueEventListener);
+        //Get squat data
+        //Query query = FirebaseDatabase.getInstance().getReference("SQUAT").orderByChild("date");
+        //query.addListenerForSingleValueEvent(valueEventListener);
+        Log.d("SQUAT_QUERY", squatVolume.toString());
 
-        /*
-        for(int i=0;i<weightVolume.size();i++) {
-            weightStat[i] = weightVolume.get(i).toString();
-        }
+        //Get bench press data
+        //Query query２ = FirebaseDatabase.getInstance().getReference("BENCH").orderByChild("date");
+        //query２.addListenerForSingleValueEvent(BenchValueEventListener);
+        //Log.d("BENCH_QUERY", benchVolume.toString());
 
-         */
-        //Log.d("SendValue", weightStat[0]);
+        //Get deadlift data
+        //Query query3 = FirebaseDatabase.getInstance().getReference("DEADLIFT").orderByChild("date");
+        //query3.addListenerForSingleValueEvent(DeadliftValueEventListener);
+        Log.d("DEADLIFT_QUERY", deadliftVolume.toString());
+
         getVar();
     }
 
+    //設定深蹲的listener
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -197,16 +206,52 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
             if(dataSnapshot.exists()) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
-                    squatVolume.add(user.getReps());
+                    squatVolume.add(user.getWeight()); //深蹲重量
                     saveDate.add(user.getDate());
-                    weightVolume.add(user.getWeight());
-                    Log.v("SquatVolume", squatVolume.toString());
-                    Log.d("WeightVolume", weightVolume.toString());
-
+                    Log.v("Listener_squat", squatVolume.toString());
                 }
             }
         }
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
 
+        }
+    };
+
+    //設定臥推的listener
+    ValueEventListener BenchValueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+            if(dataSnapshot.exists()) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    User user = snapshot.getValue(User.class);
+                    benchVolume.add(user.getWeight());  //臥推重量
+                    saveDate.add(user.getDate());
+                    Log.v("ListenerBench", benchVolume.toString());
+                }
+            }
+        }
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    };
+
+    //設定硬舉的listener
+    ValueEventListener DeadliftValueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+            if(dataSnapshot.exists()) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    User user = snapshot.getValue(User.class);
+                    deadliftVolume.add(user.getWeight());  //硬舉重量
+                    saveDate.add(user.getDate());
+                    Log.v("ListenerDeadlift", deadliftVolume.toString());
+                }
+            }
+        }
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -246,15 +291,50 @@ public class Record extends AppCompatActivity implements PopupMenu.OnMenuItemCli
                 return true;
 
             case R.id.item4:
+                which_sport = 1;
+                Query query = FirebaseDatabase.getInstance().getReference("SQUAT").orderByChild("date");
+                query.addListenerForSingleValueEvent(valueEventListener);
+                Log.d("SQUAT_QUERY", squatVolume.toString());
+                //Log.d("which:", Integer.toString(which_sport));
                 Intent intent = new Intent();
                 intent.setClass(Record.this, ShowGraph.class);
                 Bundle bundle = new Bundle();
+                bundle.putInt("sport", which_sport);
                 bundle.putIntegerArrayList("liststr", squatVolume);
                 bundle.putIntegerArrayList("date", saveDate);
-                bundle.putIntegerArrayList("weight", weightVolume);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return true;
+
+            case R.id.item5:
+                which_sport = 2;
+                Query query２ = FirebaseDatabase.getInstance().getReference("BENCH").orderByChild("date");
+                query２.addListenerForSingleValueEvent(BenchValueEventListener);
+                Log.d("BenchQuery", benchVolume.toString());
+                Intent intent2 = new Intent();
+                intent2.setClass(Record.this, ShowGraph.class);
+                Bundle bundle2 = new Bundle();
+                bundle2.putInt("sport", which_sport);
+                bundle2.putIntegerArrayList("benchData", benchVolume);
+                bundle2.putIntegerArrayList("date", saveDate);
+                intent2.putExtras(bundle2);
+                startActivity(intent2);
+                return true;
+
+            case R.id.item6:
+                which_sport = 3;
+                Query query3 = FirebaseDatabase.getInstance().getReference("DEADLIFT").orderByChild("date");
+                query3.addListenerForSingleValueEvent(DeadliftValueEventListener);
+                Intent intent3 = new Intent();
+                intent3.setClass(Record.this, ShowGraph.class);
+                Bundle bundle3 = new Bundle();
+                bundle3.putInt("sport", which_sport);
+                bundle3.putIntegerArrayList("deadliftData", deadliftVolume);
+                bundle3.putIntegerArrayList("date", saveDate);
+                intent3.putExtras(bundle3);
+                startActivity(intent3);
+                return true;
+
             default:
                 return false;
 
