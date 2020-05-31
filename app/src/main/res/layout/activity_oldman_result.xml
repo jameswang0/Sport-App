@@ -1,53 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="16dp"
-    android:orientation="vertical"
-    tools:context=".OldmanResult">
+    android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/listView"
+
+    <RelativeLayout
+        android:id="@+id/inputLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/send_message_layout"
-        android:divider="@null" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:gravity="bottom"
+        android:paddingBottom="9dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp">
 
-        <LinearLayout
-            android:id="@+id/send_message_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:background="#FFFFFF"
-            android:gravity="center_vertical">
-
-
+        <!--<ai.api.ui.AIButton-->
+        <!--android:id="@+id/micButton"-->
+        <!--style="@style/ApiAi.Microphone"-->
+        <!--android:layout_height="152dp"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:visibility="visible" />-->
 
         <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/bot" />
+            android:id="@+id/sendBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:paddingTop="4dp"
+            app:srcCompat="@drawable/chatbot_send_btn" />
 
-            <EditText
-                android:id="@+id/editTextMsg"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="1" />
+        <EditText
+            android:id="@+id/queryEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/sendBtn"
+            android:imeOptions="actionSend"
+            android:inputType="text"
+            android:paddingTop="4dp"
+            android:textSize="18sp" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btnSend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_send_24dp" />
+    </RelativeLayout>
 
-        </LinearLayout>
-    
+    <ScrollView
+        android:id="@+id/chatScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/inputLayout">
 
+        <LinearLayout
+            android:id="@+id/chatLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+
+
+    </ScrollView>
 
 </RelativeLayout>
